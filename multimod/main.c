@@ -51,7 +51,10 @@ int main(int argc, char *argv[]) {
   for(int i=0;i<1000000;i++){
 	  fscanf(f,"%ld %ld %ld %ld",&a,&b,&m,&result);
 	  int64_t ret = func(a,b,m);
-	  if(ret == result)count++;
+	  if(ret == result){
+		  count++;
+		  printf("%ld %ld %ld\n",a,b,m);
+	  }
 	  //else{
 		  //printf("%ld %ld\n",ret,result);
 	  //}
