@@ -40,6 +40,7 @@ int main(int argc, char *argv[]) {
   //b = strtoll(argv[optind + 1], NULL, 10);
   //m = strtoll(argv[optind + 2], NULL, 10);
 
+  int64_t a,b,m,result;
   int count=0;
   FILE *f = fopen("test","r");
   for(int i=0;i<100000;i++){
