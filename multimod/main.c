@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
   int64_t a,b,m,result;
   int64_t count=0;
   FILE *f = fopen("test","r");
-  for(int i=0;i<100000;i++){
+  for(int i=0;i<1000000;i++){
 	  fscanf(f,"%ld %ld %ld %ld",&a,&b,&m,&result);
 	  int64_t ret = func(a,b,m);
 	  if(ret == result)count++;
