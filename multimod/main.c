@@ -52,9 +52,9 @@ int main(int argc, char *argv[]) {
 	  fscanf(f,"%ld %ld %ld %ld",&a,&b,&m,&result);
 	  int64_t ret = func(a,b,m);
 	  if(ret == result)count++;
-	  else{
-		  printf("%ld %ld\n",ret,result);
-	  }
+	  //else{
+		  //printf("%ld %ld\n",ret,result);
+	  //}
   }
   stop = clock();
   duration = (double)(stop-start)/CLOCKS_PER_SEC;
