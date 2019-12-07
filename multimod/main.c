@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 		  //printf("%ld %ld\n",ret,result);
 	  //}
   }
-  printf("the biggest a*b is %lf\n",x);
+  printf("the biggest a*b is %Lf\n",x);
   stop = clock();
   duration = (double)(stop-start)/CLOCKS_PER_SEC;
   printf("the time is %lf sec\n",duration);
