@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
 	  int64_t ret = func(a,b,m);
 	  if(ret == result)count++;
   }
+  printf("the passed number is:%d",count);
 
   //int64_t ret = func(2, 3, 5);
   //printf("%ld\n", ret);
