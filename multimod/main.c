@@ -47,6 +47,9 @@ int main(int argc, char *argv[]) {
 	  fscanf(f,"%ld %ld %ld %ld",&a,&b,&m,&result);
 	  int64_t ret = func(a,b,m);
 	  if(ret == result)count++;
+	  else{
+		  printf("%ld %ld\n",ret,result);
+	  }
   }
   printf("the passed number is:%ld\n",count);
 
