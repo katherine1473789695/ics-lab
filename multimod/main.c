@@ -40,6 +40,6 @@ int main(int argc, char *argv[]) {
   //b = strtoll(argv[optind + 1], NULL, 10);
   //m = strtoll(argv[optind + 2], NULL, 10);
 
-  int64_t ret = fuc(2, 3, 5);
+  int64_t ret = func(2, 3, 5);
   printf("%ld\n", ret);
 }
