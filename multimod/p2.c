@@ -2,9 +2,9 @@
 
 int64_t multimod_p2(int64_t a, int64_t b, int64_t m) {
   // TODO: implement
-  if(a>m)a = a%m;
-  if(b>m)b = b%m;
-  int64_t result=0;
+  uint64_t a = a%m;
+  uint64_t b = b%m;
+  uint64_t result=0;
   while(a){
 	  if(a&1)result = (result+b)%m;
 	  b = (b<<1)%m;
