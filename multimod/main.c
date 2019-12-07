@@ -48,17 +48,20 @@ int main(int argc, char *argv[]) {
   int64_t count=0;
   FILE *f = fopen("test","r");
   start = clock();
+  long double x =0;
   for(int i=0;i<1000000;i++){
 	  fscanf(f,"%ld %ld %ld %ld",&a,&b,&m,&result);
 	  int64_t ret = func(a,b,m);
 	  if(ret == result){
 		  count++;
 		  printf("%ld %ld %ld\n",a,b,m);
+		  if(a*b>x)x=a*b;
 	  }
 	  //else{
 		  //printf("%ld %ld\n",ret,result);
 	  //}
   }
+  printf("the biggest a*b is %llf\n",x);
   stop = clock();
   duration = (double)(stop-start)/CLOCKS_PER_SEC;
   printf("the time is %lf sec\n",duration);
