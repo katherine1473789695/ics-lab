@@ -41,14 +41,14 @@ int main(int argc, char *argv[]) {
   //m = strtoll(argv[optind + 2], NULL, 10);
 
   int64_t a,b,m,result;
-  int count=0;
+  int64_t count=0;
   FILE *f = fopen("test","r");
   for(int i=0;i<100000;i++){
 	  fscanf(f,"%ld %ld %ld %ld",&a,&b,&m,&result);
 	  int64_t ret = func(a,b,m);
 	  if(ret == result)count++;
   }
-  printf("the passed number is:%d",count);
+  printf("the passed number is:%ld\n",count);
 
   //int64_t ret = func(2, 3, 5);
   //printf("%ld\n", ret);
