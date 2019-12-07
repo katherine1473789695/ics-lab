@@ -2,6 +2,10 @@
 #include <getopt.h>
 #include <stdlib.h>
 #include "multimod.h"
+#include <time.h>
+
+clock_t start, stop;
+double duration;
 
 static struct option long_option[] = {
   { "i", required_argument, NULL, 'i' },
@@ -43,6 +47,7 @@ int main(int argc, char *argv[]) {
   int64_t a,b,m,result;
   int64_t count=0;
   FILE *f = fopen("test","r");
+  start = clock();
   for(int i=0;i<1000000;i++){
 	  fscanf(f,"%ld %ld %ld %ld",&a,&b,&m,&result);
 	  int64_t ret = func(a,b,m);
@@ -51,6 +56,9 @@ int main(int argc, char *argv[]) {
 		  printf("%ld %ld\n",ret,result);
 	  }
   }
+  stop = clock();
+  duration = (double)(stop-start)/CLOCKS_PER_SEC;
+  printf("the time is %lf sec\n",duration);
   printf("the passed number is:%ld\n",count);
 
   //int64_t ret = func(2, 3, 5);
