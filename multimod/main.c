@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
   int64_t a,b,m,result;
   int64_t count=0;
-  FILE *f = fopen("test","r");
+  FILE *f = fopen("test1","r");
   start = clock();
   long double x =0;
   for(int i=0;i<1000000;i++){
