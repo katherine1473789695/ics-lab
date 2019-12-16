@@ -24,7 +24,7 @@ int asm_popcnt(uint64_t n) {
 			  "andq $1,%%rax;"
 			  "addq %%rax,%[cnt];"
 			  "shrq %[n];"
-			  :
+			  :[n]"+r"(n),[cnt]"+r"(count)
 			  :[n]"+r"(n),[cnt]"+r"(count)
 			  :"%rax" 
 			  );
