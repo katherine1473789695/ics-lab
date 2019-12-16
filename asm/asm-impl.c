@@ -4,14 +4,15 @@
 
 int64_t asm_add(int64_t a, int64_t b) {
   // TODO: implement
-  //int64_t result = 0;
+  int64_t result = 0;
   asm volatile(
-		  "addq %[a],%[b];"
-		  : [b] "=r" (b)
-		  : [a] "r" (a)
+		  "movq %[a],%[res];"
+		  "addq %[b],%[res];"
+		  : [res] "=r" (result)
+		  : [a] "r" (a),[b]"r"(b)
 	 );
-  printf("%ld\n",b);
-  return b;
+  printf("%ld\n",result);
+  return result;
 }
 
 int asm_popcnt(uint64_t n) {
