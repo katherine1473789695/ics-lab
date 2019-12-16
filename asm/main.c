@@ -15,6 +15,9 @@ int main() {
   assert(asm_add(-64,79) == 15);
 
   assert(asm_popcnt(0xffffffffffffffffull) == 64);
+  assert(asm_popcnt(0x0000ffffffffffffull) == 48);
+  assert(asm_popcnt(0x0000000000000001ull) == 1);
+  assert(asm_popcnt(0x0123456789abcdefull) == 32);
 
   // TODO: add memcpy tests here!
   assert(asm_memcpy(NULL, NULL, 0) == NULL);
