@@ -3,7 +3,13 @@
 
 int64_t asm_add(int64_t a, int64_t b) {
   // TODO: implement
-  return 0;
+  int64_t result = 0;
+  asm volatile(
+		  "addq %[a],%[b];"
+		  : [b] "r=" (b)
+		  : [a] "r" (a)
+	 );
+  return b;
 }
 
 int asm_popcnt(uint64_t n) {
