@@ -9,6 +9,7 @@ int64_t asm_add(int64_t a, int64_t b) {
 		  : [b] "=r" (b)
 		  : [a] "r" (a)
 	 );
+  printf("%d\n",b);
   return b;
 }
 
