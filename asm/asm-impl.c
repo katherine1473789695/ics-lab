@@ -34,7 +34,7 @@ int asm_popcnt(uint64_t n) {
 
 void *asm_memcpy(void *dest, const void *src, size_t n) {
   // TODO: implement
-  printf("dest: %p",dest);
+  printf("dest: %p\n",dest);
 
   return dest;
 }
