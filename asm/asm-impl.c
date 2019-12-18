@@ -35,7 +35,19 @@ int asm_popcnt(uint64_t n) {
 void *asm_memcpy(void *dest, const void *src, size_t n) {
   // TODO: implement
   printf("dest: %p\n",dest);
-
+  for(uint64_t i = 0;i<n;i++){
+	  asm volatile(
+			  "movq %[dest],%%rdi;"
+			  "movq %[src],%%rsi;"
+			  "addq %[i],%%rdi;"
+			  "addq %[i],%%rsi;"
+			  "movb (%%rsi),%%al;"
+			  "movb %%al,(%%rdi);"
+			  :
+			  :[dest]"r"(dest),[src]"r"(src),[i]"r"(i)
+			  :"%rdi","%rsi","%al"
+			  );
+  }
   return dest;
 }
 
