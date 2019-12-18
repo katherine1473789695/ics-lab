@@ -48,6 +48,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 			  :"%rdi","%rsi","%al"
 			  );
   }
+  printf("the dest after: %p\n",dest);
   return dest;
 }
 
