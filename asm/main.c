@@ -20,7 +20,7 @@ int main() {
   assert(asm_popcnt(0x0123456789abcdefull) == 32);
 
   // TODO: add memcpy tests here!
-  assert(asm_memcpy(NULL, NULL, 0) == NULL);
+  assert(asm_memcpy("hello", "merry", 5) == NULL);
 
   // setjmp test starts here
   setjmp_test0();

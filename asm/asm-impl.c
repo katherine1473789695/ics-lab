@@ -34,7 +34,9 @@ int asm_popcnt(uint64_t n) {
 
 void *asm_memcpy(void *dest, const void *src, size_t n) {
   // TODO: implement
-  return NULL;
+  printf("dest: %p",dest);
+
+  return dest;
 }
 
 int asm_setjmp(asm_jmp_buf env) {
