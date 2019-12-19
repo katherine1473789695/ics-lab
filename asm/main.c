@@ -23,7 +23,7 @@ int main() {
   char buf[] = "iloveyou";
   char dest[10];
   printf("%s\n",dest);
-  assert(asm_memcpy(dest, buf, 7) == dest);
+  assert(asm_memcpy(dest, buf, 8) == dest);
   printf("%s\n",dest);
 
   // setjmp test starts here
