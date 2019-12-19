@@ -22,7 +22,7 @@ int main() {
   // TODO: add memcpy tests here!
   char buf[] = "hello";
   char dest[10];
-  assert(asm_memcpy(dest, buf, 5) == "hello");
+  assert(asm_memcpy(dest, buf, 5) == dest);
 
   // setjmp test starts here
   setjmp_test0();
