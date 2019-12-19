@@ -20,7 +20,7 @@ int main() {
   assert(asm_popcnt(0x0123456789abcdefull) == 32);
 
   // TODO: add memcpy tests here!
-  char buf[] = "hello";
+  char buf[] = "iloveyou";
   char dest[10];
   printf("%s\n",dest);
   assert(asm_memcpy(dest, buf, 6) == dest);
