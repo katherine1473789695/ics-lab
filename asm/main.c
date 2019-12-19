@@ -22,6 +22,7 @@ int main() {
   // TODO: add memcpy tests here!
   char buf[] = "hello";
   char dest[10];
+  printf("%s\n",dest);
   assert(asm_memcpy(dest, buf, 6) == dest);
   printf("%s\n",dest);
 
