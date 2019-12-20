@@ -35,6 +35,7 @@ int main() {
   // setjmp test starts here
   setjmp_test0();
   setjmp_test1();
+  printf("finished!\n");
 }
 
 struct log_entry {
