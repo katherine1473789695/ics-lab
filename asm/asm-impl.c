@@ -64,8 +64,16 @@ int asm_setjmp(asm_jmp_buf env) {
 		  "movq %%rdi,40(%[env]);"
 		  "movq %%rsp,48(%[env]);"
 		  "movq %%rbp,56(%[env]);"
+		  "movq %%r8,64(%[env]);"
+		  "movq %%r9,72(%[env]);"
+		  "movq %%r10,80(%[env]);"
+		  "movq %%r11,88(%[env]);"
+		  "movq %%r12,96(%[env]);"
+		  "movq %%r13,104(%[env]);"
+		  "movq %%r14,112(%[env]);"
+		  "movq %%r15,120(%[env]);"
 		  :
-		  :[env]"r"(env)
+		  :[env]"D"(env)
 		  );
   return 0;
 }
