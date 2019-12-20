@@ -72,7 +72,7 @@ int asm_setjmp(asm_jmp_buf env) {
 		  "movq %%r13,104(%[env]);"
 		  "movq %%r14,112(%[env]);"
 		  "movq %%r15,120(%[env]);"
-		  "movq (%%rsp),%%rax;"
+		  "movq (%%rsp),%%rax;"//return value (pc) 
 		  "movq %%rax,128(%[env]);"
 		  :
 		  :[env]"D"(env)
@@ -95,12 +95,15 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 		  "movq 48(%[env]),%%rsp;"
 		  //"movq 40(%[env]),%%rdi;"
 		  //"movq 32(%[env]),%%rsi;"
+		  //i realized i need to use these registers later
 		  "movq 24(%[env]),%%rdx;"
 		  "movq 16(%[env]),%%rcx;"
 		  "movq 8(%[env]),%%rbx;"
 		  "testq %%rax,%%rax;"
+		  //if val == 0 return 1
 		  "movq $1,%%rsi;"
 		  "cmove %%rsi,%%rax;"
+		  //conditional mov
 		  "movq 128(%[env]),%%rsi;"
 		  "movq %%rsi,(%%rsp);"
 		  "movq 40(%[env]),%%rdi;"
