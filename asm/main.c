@@ -25,6 +25,12 @@ int main() {
   printf("%s\n",dest);
   assert(asm_memcpy(dest, buf, 9) == dest);
   printf("%s\n",dest);
+  int numbers[10] = {1,2,3.4.5.6.7.8.9,10};
+  int dest_nums[10]={};
+  printf("%d\n",dest_nums[0]);
+  asm_memcpy(dest_nums,numbers,10);
+  printf("%d\n",dest_nums[0]);
+
 
   // setjmp test starts here
   setjmp_test0();
