@@ -55,6 +55,18 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 
 int asm_setjmp(asm_jmp_buf env) {
   // TODO: implement
+  asm volatile(
+		  "movq %%rax,(%[env]);"
+		  "movq %%rbx,8(%[env]);"
+		  "movq %%rcx,16(%[env]);"
+		  "movq %%rdx,24(%[env]);"
+		  "movq %%rsi,32(%[env]);"
+		  "movq %%rdi,40(%[env]);"
+		  "movq %%rsp,48(%[env]);"
+		  "movq %%rbp,56(%[env]);"
+		  :
+		  :[env]"r"(env)
+		  );
   return 0;
 }
 
