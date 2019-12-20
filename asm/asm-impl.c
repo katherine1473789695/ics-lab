@@ -72,7 +72,8 @@ int asm_setjmp(asm_jmp_buf env) {
 		  "movq %%r13,104(%[env]);"
 		  "movq %%r14,112(%[env]);"
 		  "movq %%r15,120(%[env]);"
-		  "movq %%rip,128(%[env]);"
+		  "movq (%%rsp),%%rax;"
+		  "movq %%rax,128(%[env]);"
 		  :
 		  :[env]"D"(env)
 		  );
