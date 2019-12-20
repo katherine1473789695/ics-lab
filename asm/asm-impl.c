@@ -99,7 +99,8 @@ void asm_longjmp(asm_jmp_buf env, int val) {
 		  "movq 16(%[env]),%%rcx;"
 		  "movq 8(%[env]),%%rbx;"
 		  "testq %%rax,%%rax;"
-		  "cmove $1,%%rax;"
+		  "movq $1,%%rsi;"
+		  "cmove %%rsi,%%rax;"
 		  :
 		  :[env]"D"(env),[val]"a"(val)
 		  );
