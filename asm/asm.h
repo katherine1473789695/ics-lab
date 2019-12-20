@@ -3,6 +3,7 @@
 
 // TODO: set correct array length
 typedef uintptr_t asm_jmp_buf[17];
+//16 registers and one pc((%rsp))
 
 int64_t asm_add(int64_t a, int64_t b);
 int asm_popcnt(uint64_t x);
