@@ -27,9 +27,9 @@ int main() {
   printf("%s\n",dest);
   int numbers[10] = {1,2,3,4,5,6,7,8,9,10};
   int dest_nums[10]={};
-  printf("%d\n",dest_nums[5]);
+  printf("%d\n",dest_nums[1]);
   asm_memcpy(dest_nums,numbers,10);
-  printf("%d\n",dest_nums[5]);
+  printf("%d\n",dest_nums[1]);
 
 
   // setjmp test starts here
