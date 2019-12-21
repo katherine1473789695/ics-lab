@@ -17,12 +17,16 @@ static void (*lookup(const char *fn))();
 int main(int argc, char **argv) {
   // TODO: parse arguments: set @func and @rounds
   printf("%d,%s\n",argc,argv[2]);
+  int rounds = 10;
   if(argc == 2){
 	  char *name = argv[1];
 	  printf("%s\n",name);
+  }else if(argc == 4){
+	  char *op = argv[1];
+	  printf("%s\n",op);
   }
-  void (*func)() = lookup("dummy");
-  int rounds = 10;
+  //void (*func)() = lookup("dummy");
+  void (*func)() = lookup(name);
 
   run(func, rounds);
 }
