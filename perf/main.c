@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
 	  printf("%s\n",name);
   }else if(argc == 4){
 	  char *op = argv[1];
-	  printf("%s\n",op);
+	  if(strcmp(op,"-r")==0)printf("here\n");
   }
   //void (*func)() = lookup("dummy");
   void (*func)() = lookup(name);
