@@ -71,10 +71,22 @@ static void run(void (*func)(), int rounds) {
     func();
     uint64_t ed = gettime();
     elapsed[round] = ed - st;
-	printf("%ld\n",elapsed[round]);
+	//printf("%ld\n",elapsed[round]);
   }
 
   // TODO: display runtime statistics
+  uint64_t total = 0;
+  uint64_t max = elapsed[0];
+  uint64_t min = elapsed[0];
+  for(int i=0;i<rounds;i++){
+    total+=elapsed[i];
+    if(elapsed[i]>max)max=elapsed[i];
+    if(elapsed[i]<min)min=elapsed[i];
+  }
+  uint64_t average = (double)total/(double)rounds;
+  printf("the total time is %ld\n",total);
+  printf("the average time is %ld\n",average);
+  printf("the max time is %ld and the min time is %ld\n",max,min);
 
   free(elapsed);
 }
