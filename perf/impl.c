@@ -24,8 +24,8 @@ void simple_loop() {
 void multimod_p1() {
   FILE *f = fopen("test9","r");
   int64_t a,b,m;
-  fscanf(f,"%x %x %ld",&a,&b,&m);
-  printf("%x,%x,%ld\n",a,b,m);
+  fscanf(f,"%lx %lx %ld",&a,&b,&m);
+  printf("%lx,%lx,%ld\n",a,b,m);
   //fscanf(f,"%ld %ld %ld",&a,&b,&m);
   // TODO: implement
   if(a>m)a = a%m;
@@ -44,7 +44,7 @@ void multimod_p2() {
   // TODO: implement
   FILE *f = fopen("test9","r");
   int64_t a,b,m;
-  fscanf(f,"%x %x %ld",&a,&b,&m);
+  fscanf(f,"%lx %lx %ld",&a,&b,&m);
   //fscanf(f,"%ld %ld %ld",&a,&b,&m);
   uint64_t na = a%m;
   uint64_t nb = b%m;
@@ -61,7 +61,7 @@ void multimod_p2() {
 void multimod_p3() {
   FILE *f = fopen("test9","r");
   int64_t a,b,m;
-  fscanf(f,"%x %x %ld",&a,&b,&m);
+  fscanf(f,"%lx %lx %ld",&a,&b,&m);
   //fscanf(f,"%ld %ld %ld",&a,&b,&m);
   int64_t t = (a * b - (int64_t)((double)a * b / m) * m) % m;
   t=( t < 0 ? t + m : t);
