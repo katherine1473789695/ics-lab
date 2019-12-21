@@ -71,6 +71,7 @@ static void run(void (*func)(), int rounds) {
     func();
     uint64_t ed = gettime();
     elapsed[round] = ed - st;
+	printf("%ld\n",elapsed[round]);
   }
 
   // TODO: display runtime statistics
