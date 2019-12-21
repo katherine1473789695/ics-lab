@@ -16,12 +16,12 @@ static void (*lookup(const char *fn))();
 
 int main(int argc, char **argv) {
   // TODO: parse arguments: set @func and @rounds
-  printf("%d,%s\n",argc,argv[2]);
+  //printf("%d,%s\n",argc,argv[2]);
   int rounds = 1;
   char *name = NULL;
   if(argc == 2){
 	  name = argv[1];
-	  printf("%s\n",name);
+	  //printf("%s\n",name);
   }else if(argc == 4){
 	  char *op = argv[1];
 	  if(strcmp(op,"-r")==0){
