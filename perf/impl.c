@@ -25,7 +25,7 @@ void multimod_p1() {
   FILE *f = fopen("test9","r");
   int64_t a,b,m;
   fscanf(f,"%lx %lx %ld",&a,&b,&m);
-  printf("%lx,%lx,%ld\n",a,b,m);
+  //printf("%lx,%lx,%ld\n",a,b,m);
   //fscanf(f,"%ld %ld %ld",&a,&b,&m);
   // TODO: implement
   if(a>m)a = a%m;
