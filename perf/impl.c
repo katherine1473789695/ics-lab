@@ -19,8 +19,10 @@ void simple_loop() {
   for (volatile int i = 0; i < 1000000; i++) ;
 }
 
+FILE *f = fopen("test1","r");
+
 void multimod_p1() {
-  FILE *f = fopen("test1","r");
+  //FILE *f = fopen("test1","r");
   int64_t a,b,m;
   fscanf(f,"%ld %ld %ld",&a,&b,&m);
   // TODO: implement
