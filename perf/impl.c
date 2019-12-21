@@ -19,10 +19,10 @@ void simple_loop() {
   for (volatile int i = 0; i < 1000000; i++) ;
 }
 
-FILE *f = fopen("test1","r");
+//FILE *f = fopen("test1","r");
 
 void multimod_p1() {
-  //FILE *f = fopen("test1","r");
+  FILE *f = fopen("test1","r");
   int64_t a,b,m;
   fscanf(f,"%ld %ld %ld",&a,&b,&m);
   // TODO: implement
@@ -32,7 +32,7 @@ void multimod_p1() {
   int64_t result =a*b-multi*m;
   while(result<0)result+=m;
   while(result>=m)result-=m;
-  printf("result is %ld\n",result);
+  //printf("result is %ld\n",result);
   fclose(f);
 
   //return result;
@@ -51,6 +51,7 @@ void multimod_p2() {
 	  nb = (nb<<1)%m;
 	  na>>=1;
   }
+  fclose(f);
   //return result;
 }
 
@@ -60,4 +61,5 @@ void multimod_p3() {
   fscanf(f,"%ld %ld %ld",&a,&b,&m);
   int64_t t = (a * b - (int64_t)((double)a * b / m) * m) % m;
   t=( t < 0 ? t + m : t);
+  fclose(f);
 }
