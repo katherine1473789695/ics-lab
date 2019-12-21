@@ -24,8 +24,12 @@ int main(int argc, char **argv) {
 	  printf("%s\n",name);
   }else if(argc == 4){
 	  char *op = argv[1];
-	  if(strcmp(op,"-r")==0)printf("here\n");
-  }
+	  if(strcmp(op,"-r")==0){
+		  rounds = atoi(argv[2]);
+		  name = argv[3];
+	  }else printf("Wrong argument!\n");
+  }else{
+	  printf("Wrong number of argument!\n");
   //void (*func)() = lookup("dummy");
   void (*func)() = lookup(name);
 
