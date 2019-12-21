@@ -83,9 +83,9 @@ static void run(void (*func)(), int rounds) {
     if(elapsed[i]>max)max=elapsed[i];
     if(elapsed[i]<min)min=elapsed[i];
   }
-  uint64_t average = (double)total/(double)rounds;
+  double average = (double)total/(double)rounds;
   printf("the total time is %ld\n",total);
-  printf("the average time is %ld\n",average);
+  printf("the average time is %f\n",average);
   printf("the max time is %ld and the min time is %ld\n",max,min);
 
   free(elapsed);
