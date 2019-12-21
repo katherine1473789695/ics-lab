@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 
 static uint64_t gettime() {
   // TODO: implement me!
-  return time(NULL);
+  return clock();
 }
 
 static void (*lookup(const char *fn))() {
