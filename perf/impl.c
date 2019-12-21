@@ -31,7 +31,7 @@ void multimod_p1() {
   while(result<0)result+=m;
   while(result>=m)result-=m;
   printf("result is %ld\n",result);
-  fclose(f)；
+  fclose(f);
 
   //return result;
 }
