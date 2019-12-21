@@ -18,8 +18,9 @@ int main(int argc, char **argv) {
   // TODO: parse arguments: set @func and @rounds
   printf("%d,%s\n",argc,argv[2]);
   int rounds = 10;
+  char *name = NULL;
   if(argc == 2){
-	  char *name = argv[1];
+	  name = argv[1];
 	  printf("%s\n",name);
   }else if(argc == 4){
 	  char *op = argv[1];
