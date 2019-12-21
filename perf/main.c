@@ -17,7 +17,7 @@ static void (*lookup(const char *fn))();
 int main(int argc, char **argv) {
   // TODO: parse arguments: set @func and @rounds
   printf("%d,%s\n",argc,argv[2]);
-  int rounds = 10;
+  int rounds = 1;
   char *name = NULL;
   if(argc == 2){
 	  name = argv[1];
