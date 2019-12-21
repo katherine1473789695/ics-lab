@@ -30,6 +30,7 @@ int main(int argc, char **argv) {
 	  }else printf("Wrong argument!\n");
   }else{
 	  printf("Wrong number of argument!\n");
+  }
   //void (*func)() = lookup("dummy");
   void (*func)() = lookup(name);
 
