@@ -22,7 +22,7 @@ void simple_loop() {
 //FILE *f = fopen("test1","r");
 
 void multimod_p1() {
-  FILE *f = fopen("test6","r");
+  FILE *f = fopen("test7","r");
   int64_t a,b,m;
   fscanf(f,"%ld %ld %ld",&a,&b,&m);
   // TODO: implement
@@ -40,7 +40,7 @@ void multimod_p1() {
 
 void multimod_p2() {
   // TODO: implement
-  FILE *f = fopen("test6","r");
+  FILE *f = fopen("test7","r");
   int64_t a,b,m;
   fscanf(f,"%ld %ld %ld",&a,&b,&m);
   uint64_t na = a%m;
@@ -56,7 +56,7 @@ void multimod_p2() {
 }
 
 void multimod_p3() {
-  FILE *f = fopen("test6","r");
+  FILE *f = fopen("test7","r");
   int64_t a,b,m;
   fscanf(f,"%ld %ld %ld",&a,&b,&m);
   int64_t t = (a * b - (int64_t)((double)a * b / m) * m) % m;
