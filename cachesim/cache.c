@@ -5,6 +5,8 @@ void mem_read(uintptr_t block_num, uint8_t *buf);
 void mem_write(uintptr_t block_num, const uint8_t *buf);
 
 static uint64_t cycle_cnt = 0;
+static uint64_t count = 0;
+static uint64_t miss = 0;
 
 void cycle_increase(int n) { cycle_cnt += n; }
 
@@ -56,6 +58,7 @@ void write_four(int setnum,int linnum,uintptr_t addr,uint32_t data,uint32_t wmas
 }
 
 uint32_t cache_read(uintptr_t addr) {
+  count++;
   addr = addr&(~0x3);
   int setnum = (addr&((1<<(caches->width_of_setnum+BLOCK_WIDTH))-1))>>BLOCK_WIDTH;
   //printf("the set num is %d\n",setnum);
@@ -69,6 +72,7 @@ uint32_t cache_read(uintptr_t addr) {
     }
   }
   //not hit
+  miss++;
   bool flag = false;
   //find a free line
   for(int i=0;i<caches->line_number;i++){
@@ -102,6 +106,7 @@ uint32_t cache_read(uintptr_t addr) {
 }
 
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
+  count++;
   addr = addr &(~0x3);
   int setnum = (addr&((1<<(caches->width_of_setnum+BLOCK_WIDTH))-1))>>BLOCK_WIDTH;
   uint32_t tag = addr>>(caches->width_of_setnum+BLOCK_WIDTH);
@@ -116,6 +121,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
     }
   }
   //not hit
+  miss++;
   //judge if there is free line
   for(int i=0;i<caches->line_number;i++){
     if(caches->sets[setnum].lines[i].valid == 0){
@@ -169,4 +175,8 @@ void init_cache(int total_size_width, int associativity_width) {
 
 
 void display_statistic(void) {
+  printf("the cycle_cnt is %ld\t",cycle_cnt);
+  printf("the total count is %ld\t",count);
+  printf("the missing count is %ld\n",miss);
+  printf("RATE: %lf\n",1-((double)miss/(double)count));
 }
