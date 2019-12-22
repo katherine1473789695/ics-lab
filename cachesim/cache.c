@@ -40,6 +40,20 @@ uint32_t read_four(int setnum,int linnum,uintptr_t addr){
   return (fourth<<24)|(third<<16)|(second<<8)|first;
 }
 
+void write_four(int setnum,int linnum,uintptr_t addr,uint32_t data,uint32_t wmask){
+  uint32_t mask = mask_with_len(BLOCK_WIDTH);
+  uint32_t offset = addr & mask; 
+  data = data & wmask;
+  caches->sets[setnum].lines[linnum].data[offset+3] &= ((~wmask)>>24);
+  caches->sets[setnum].lines[linnum].data[offset+3] |= (data>>24);
+  caches->sets[setnum].lines[linnum].data[offset+2] &= (((~wmask)<<8)>>24);
+  caches->sets[setnum].lines[linnum].data[offset+2] |= ((data<<8)>>24);
+  caches->sets[setnum].lines[linnum].data[offset+1] &= (((~wmask)<<16)>>24);
+  caches->sets[setnum].lines[linnum].data[offset+1] |= ((data<<16)>>24);
+  caches->sets[setnum].lines[linnum].data[offset] &= (((~wmask)<<24)>>24);
+  caches->sets[setnum].lines[linnum].data[offset] |= ((data<<24)>>24);
+}
+
 uint32_t cache_read(uintptr_t addr) {
 
   return 0;
