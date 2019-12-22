@@ -58,13 +58,13 @@ void write_four(int setnum,int linnum,uintptr_t addr,uint32_t data,uint32_t wmas
 uint32_t cache_read(uintptr_t addr) {
   addr = addr&(~0x3);
   int setnum = (addr&((1<<(caches->width_of_setnum+BLOCK_WIDTH))-1))>>BLOCK_WIDTH;
-  printf("the set num is %d\n",setnum);
+  //printf("the set num is %d\n",setnum);
   uint32_t tag = addr>>(caches->width_of_setnum+BLOCK_WIDTH);
-  printf("the tag is %u\n",tag);
+  //printf("the tag is %u\n",tag);
   for(int i=0;i<caches->line_number;i++){
     if(caches->sets[setnum].lines[i].valid == 1 && caches->sets[setnum].lines[i].tag == tag){
       //hit 
-      printf("hit line %d and set %d\n",i,setnum);
+      //printf("hit line %d and set %d\n",i,setnum);
       return read_four(setnum,i,addr);
     }
   }
