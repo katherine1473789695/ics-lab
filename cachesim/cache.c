@@ -26,6 +26,7 @@ typedef struct{
   Set* sets;
   int set_number;//the set numbers in a cache
   int line_number;//the line number of each set
+  int width_of_setnum;
 }Cache;
 
 Cache *caches;
@@ -55,6 +56,41 @@ void write_four(int setnum,int linnum,uintptr_t addr,uint32_t data,uint32_t wmas
 }
 
 uint32_t cache_read(uintptr_t addr) {
+  int setnum = (addr&((1<<(caches->width_of_setnum+BLOCK_WIDTH))-1))>>BLOCK_WIDTH;
+  uint32_t tag = addr>>(caches->width_of_setnum+BLOCK_WIDTH);
+  for(int i=0;i<caches->line_number;i++){
+    if(caches->sets[setnum].lines[i].valid == 1 && caches->sets[setnum].lines[i].tag == tag){
+      //hit 
+      return read_four(setnum,i,addr);
+    }
+  }
+  //not hit
+  bool flag = false;
+  //find a free line
+  for(int i=0;i<caches->line_number;i++){
+    if(caches->sets[setnum].lines[i].valid == 0){
+      //a free line is found
+      mem_read(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[i].data);
+      //change the valid bit
+      caches->sets[setnum].lines[i].valid = 1;
+      //set the tag
+      caches->sets[setnum].lines[i].tag = tag;
+      flag = true; // found a free line
+      return read_four(setnum,i,addr);
+    }
+  }
+  //if there is no free line pick one randomly
+  if(!flag){
+    int random = rand()%caches->line_number;
+    //write back the picked line to the mem
+    mem_write(caches->sets[setnum].lines[random].tag<<caches->width_of_setnum+setnum,caches->sets[setnum].lines[random].data);
+    //read new mem to the picked line
+    mem_read(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[random].data);
+    //set valid bit and tag
+    caches->sets[setnum].lines[random].valid = 1;
+    caches->sets[setnum].lines[random].tag = tag;
+    return read_four(setnum,random,addr);
+  }
 
   return 0;
 }
@@ -65,8 +101,9 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 void init_cache(int total_size_width, int associativity_width) {
   caches = (Cache*)malloc(sizeof(Cache));
   caches->line_number = 1<<associativity_width;//line number of each set
-  caches->set_number = exp2(total_size_width-BLOCK_SIZE-associativity_width);
+  caches->set_number = exp2(total_size_width-BLOCK_WIDTH-associativity_width);
   //set number in a cache
+  caches->width_of_setnum = total_size_width-BLOCK_WIDTH-associativity_width;
   caches->sets = (Set*)malloc(caches->set_number*sizeof(Set));
   //creat new sets
   
