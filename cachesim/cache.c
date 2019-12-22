@@ -65,6 +65,7 @@ uint32_t cache_read(uintptr_t addr) {
   uint32_t tag = addr>>(caches->width_of_setnum+BLOCK_WIDTH);
   //printf("the tag is %u\n",tag);
   for(int i=0;i<caches->line_number;i++){
+    cycle_increase(1);
     if(caches->sets[setnum].lines[i].valid == 1 && caches->sets[setnum].lines[i].tag == tag){
       //hit 
       //printf("hit line %d and set %d\n",i,setnum);
@@ -76,6 +77,7 @@ uint32_t cache_read(uintptr_t addr) {
   bool flag = false;
   //find a free line
   for(int i=0;i<caches->line_number;i++){
+    cycle_increase(1);
     if(caches->sets[setnum].lines[i].valid == 0){
       //a free line is found
       mem_read(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[i].data);
@@ -112,6 +114,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   uint32_t tag = addr>>(caches->width_of_setnum+BLOCK_WIDTH);
   //judge hit or not
   for(int i=0;i<caches->line_number;i++){
+    cycle_increase(1);
     if(caches->sets[setnum].lines[i].valid == 1 && caches->sets[setnum].lines[i].tag == tag){
       //hit 
       write_four(setnum,i,addr,data,wmask);
@@ -124,6 +127,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   miss++;
   //judge if there is free line
   for(int i=0;i<caches->line_number;i++){
+    cycle_increase(1);
     if(caches->sets[setnum].lines[i].valid == 0){
       //a free line is found
       mem_read(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[i].data);
