@@ -100,6 +100,7 @@ uint32_t cache_read(uintptr_t addr) {
 }
 
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
+  addr = addr &(~0x3);
   int setnum = (addr&((1<<(caches->width_of_setnum+BLOCK_WIDTH))-1))>>BLOCK_WIDTH;
   uint32_t tag = addr>>(caches->width_of_setnum+BLOCK_WIDTH);
   //judge hit or not
