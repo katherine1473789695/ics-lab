@@ -63,6 +63,7 @@ uint32_t cache_read(uintptr_t addr) {
   for(int i=0;i<caches->line_number;i++){
     if(caches->sets[setnum].lines[i].valid == 1 && caches->sets[setnum].lines[i].tag == tag){
       //hit 
+      printf("hit line %d and set %d\n",i,setnum);
       return read_four(setnum,i,addr);
     }
   }
@@ -85,7 +86,7 @@ uint32_t cache_read(uintptr_t addr) {
   if(!flag){
     int random = rand()%caches->line_number;
     //write back the picked line to the mem
-    mem_write((caches->sets[setnum].lines[random].tag<<caches->width_of_setnum)+setnum,caches->sets[setnum].lines[random].data);
+    //mem_write((caches->sets[setnum].lines[random].tag<<caches->width_of_setnum)+setnum,caches->sets[setnum].lines[random].data);
     //read new mem to the picked line
     mem_read(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[random].data);
     //set valid bit and tag
@@ -98,6 +99,50 @@ uint32_t cache_read(uintptr_t addr) {
 }
 
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
+  int setnum = (addr&((1<<(caches->width_of_setnum+BLOCK_WIDTH))-1))>>BLOCK_WIDTH;
+  uint32_t tag = addr>>(caches->width_of_setnum+BLOCK_WIDTH);
+  //judge hit or not
+  for(int i=0;i<caches->line_number;i++){
+    if(caches->sets[setnum].lines[i].valid == 1 && caches->sets[setnum].lines[i].tag == tag){
+      //hit 
+      write_four(setnum,i,addr,data,wmask);
+      //set dirty bit
+      caches->sets[setnum].lines[i].dirty = 1;
+      return;
+    }
+  }
+  //not hit
+  //judge if there is free line
+  for(int i=0;i<caches->line_number;i++){
+    if(caches->sets[setnum].lines[i].valid == 0){
+      //a free line is found
+      mem_read(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[i].data);
+      write_four(setnum,i,addr,data,wmask);
+      //change the valid bit
+      caches->sets[setnum].lines[i].valid = 1;
+      //set the tag
+      caches->sets[setnum].lines[i].tag = tag;
+      //set the dirty bit
+      caches->sets[setnum].lines[i].dirty = 1;
+      return;
+    }
+  }
+  //not found a free line
+  int random = rand()%caches->line_number;
+  //if revised then write back to the mem
+  if(caches->sets[setnum].lines[random].dirty == 1){
+    mem_write((caches->sets[setnum].lines[random].tag<<caches->width_of_setnum)+setnum,caches->sets[setnum].lines[random].data);
+  }
+  mem_read(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[random].data);
+  write_four(setnum,random,addr,data,wmask);
+  //set valid bit and dirty bit and tag
+  caches->sets[setnum].lines[i].valid = 1;
+  caches->sets[setnum].lines[i].tag = tag;
+  caches->sets[setnum].lines[i].dirty = 1;
+  return;
+  
+
+
 }
 
 void init_cache(int total_size_width, int associativity_width) {
