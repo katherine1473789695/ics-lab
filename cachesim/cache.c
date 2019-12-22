@@ -183,4 +183,5 @@ void display_statistic(void) {
   printf("the total count is %ld\t",count);
   printf("the missing count is %ld\n",miss);
   printf("RATE: %lf\n",1-((double)miss/(double)count));
+  printf("the average time is %lf\n",(double)cycle_cnt/(double)count);
 }
