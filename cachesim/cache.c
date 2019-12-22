@@ -87,7 +87,7 @@ uint32_t cache_read(uintptr_t addr) {
   if(!flag){
     int random = rand()%caches->line_number;
     //write back the picked line to the mem
-    mem_write((caches->sets[setnum].lines[random].tag<<caches->width_of_setnum)+setnum,caches->sets[setnum].lines[random].data);
+    //mem_write((caches->sets[setnum].lines[random].tag<<caches->width_of_setnum)+setnum,caches->sets[setnum].lines[random].data);
     //read new mem to the picked line
     mem_read(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[random].data);
     //set valid bit and tag
@@ -143,9 +143,6 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   caches->sets[setnum].lines[random].tag = tag;
   caches->sets[setnum].lines[random].dirty = 1;
   return;
-  
-
-
 }
 
 void init_cache(int total_size_width, int associativity_width) {
