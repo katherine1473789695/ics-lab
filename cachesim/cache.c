@@ -136,9 +136,9 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   mem_read(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[random].data);
   write_four(setnum,random,addr,data,wmask);
   //set valid bit and dirty bit and tag
-  caches->sets[setnum].lines[i].valid = 1;
-  caches->sets[setnum].lines[i].tag = tag;
-  caches->sets[setnum].lines[i].dirty = 1;
+  caches->sets[setnum].lines[random].valid = 1;
+  caches->sets[setnum].lines[random].tag = tag;
+  caches->sets[setnum].lines[random].dirty = 1;
   return;
   
 
