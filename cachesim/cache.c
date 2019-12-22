@@ -90,7 +90,6 @@ uint32_t cache_read(uintptr_t addr) {
     if(caches->sets[setnum].lines[random].dirty == 1){
       mem_write((caches->sets[setnum].lines[random].tag<<caches->width_of_setnum)+setnum,caches->sets[setnum].lines[random].data);
     }
-    
     //read new mem to the picked line
     mem_read(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[random].data);
     //set valid bit and tag
