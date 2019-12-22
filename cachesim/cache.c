@@ -126,7 +126,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
       caches->sets[setnum].lines[i].tag = tag;
       //set the dirty bit
       caches->sets[setnum].lines[i].dirty = 1;
-      mem_write(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[i].data);
+      //mem_write(addr>>BLOCK_WIDTH,caches->sets[setnum].lines[i].data);
       return;
     }
   }
