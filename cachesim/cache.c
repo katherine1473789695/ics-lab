@@ -30,7 +30,18 @@ typedef struct{
 
 Cache *caches;
 
+uint32_t read_four(int setnum,int linnum,uintptr_t addr){
+  uint32_t mask = mask_with_len(BLOCK_WIDTH);
+  uint32_t offset = addr&mask;
+  uint32_t first = caches->sets[setnum].lines[linnum].data[offset];
+  uint32_t second = caches->sets[setnum].lines[linnum].data[offset+1];
+  uint32_t third = caches->sets[setnum].lines[linnum].data[offset+2];
+  uint32_t fourth = caches->sets[setnum].lines[linnum].data[offset+3];
+  return (fourth<<24)|(third<<16)|(second<<8)|first;
+}
+
 uint32_t cache_read(uintptr_t addr) {
+
   return 0;
 }
 
